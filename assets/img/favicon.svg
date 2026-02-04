@@ -1,0 +1,27 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            .favicon-bg { fill: #1a1a1a; }
+            .favicon-circle { fill: none; stroke: #d4a574; stroke-width: 2; }
+            .favicon-cross { fill: #d4a574; }
+        </style>
+    </defs>
+    
+    <!-- Background -->
+    <rect width="64" height="64" class="favicon-bg"/>
+    
+    <!-- Outer Circle -->
+    <circle cx="32" cy="32" r="28" class="favicon-circle"/>
+    
+    <!-- Inner Circle -->
+    <circle cx="32" cy="32" r="24" class="favicon-circle"/>
+    
+    <!-- Diamond/Cross Shape -->
+    <g class="favicon-cross">
+        <!-- Top -->
+        <path d="M 32 12 L 38 22 L 32 28 L 26 22 Z"/>
+        
+        <!-- Bottom Triangles -->
+        <path d="M 32 28 L 44 40 L 20 40 Z"/>
+    </g>
+</svg>
