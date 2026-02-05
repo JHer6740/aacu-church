@@ -73,16 +73,16 @@ function initializeCarousel() {
         './images/IMG_4765.JPG',
     ];
     
-    // Build carousel slides dynamically with lazy loading
+    // Build carousel slides dynamically
     imageList.forEach((img, index) => {
         const slide = document.createElement('div');
         slide.className = `slide ${index === 0 ? 'active' : ''}`;
         slide.setAttribute('data-index', index);
         
-        // Use lazy loading for better performance
-        const isNearby = index <= 2; // Preload first 3 slides
+        // Load first 5 images immediately, rest with lazy loading
+        const shouldPreload = index < 5;
         slide.innerHTML = `
-            <img src="${isNearby ? img : ''}" data-src="${img}" ${isNearby ? 'loading="lazy"' : 'loading="lazy"'} alt="AACU Community - Photo ${index + 1}">
+            <img src="${img}" alt="AACU Community - Photo ${index + 1}" ${shouldPreload ? '' : 'loading="lazy"'} decoding="async">
         `;
         slidesContainer.appendChild(slide);
         
@@ -103,19 +103,6 @@ function initializeCarousel() {
     let currentSlide = 0;
     let autoPlayInterval;
     
-    // Preload nearby slide images for smooth transitions
-    function preloadNearbySlides(currentIndex) {
-        const preloadRange = 2;
-        slides.forEach((slide, index) => {
-            const img = slide.querySelector('img');
-            if (img && Math.abs(index - currentIndex) <= preloadRange) {
-                if (!img.src && img.dataset.src) {
-                    img.src = img.dataset.src;
-                }
-            }
-        });
-    }
-    
     // Show specific slide
     function showSlide(n) {
         slides.forEach(slide => slide.classList.remove('active'));
@@ -123,9 +110,6 @@ function initializeCarousel() {
         
         slides[n].classList.add('active');
         dots[n].classList.add('active');
-        
-        // Preload nearby images for smooth transitions
-        preloadNearbySlides(n);
     }
     
     // Next slide
@@ -175,9 +159,8 @@ function initializeCarousel() {
         if (e.key === 'ArrowLeft') prevSlide();
     });
     
-    // Start auto-play and preload initial nearby slides
+    // Start auto-play
     startAutoPlay();
-    preloadNearbySlides(0);
 }
 
 /**
