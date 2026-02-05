@@ -141,12 +141,47 @@ h2{font-size:28px;text-align:center;margin-top:16px}
   opacity: 1;
 }
 
+/* Language toggle button */
+.lang-toggle {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.3s;
+}
+
+.lang-toggle:hover {
+  opacity: 0.9;
+}
+
+.site-header.transparent .lang-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.4s ease;
+}
+
+.site-header.transparent:hover .lang-toggle {
+  background: var(--accent);
+  color: white;
+  border: none;
+}
+
 /* Transparent header variant (homepage) - placed after defaults so it overrides them */
-.site-header.transparent{position:fixed;top:0;left:0;right:0;background:transparent;border-bottom:0;z-index:120}
-.site-header.transparent .nav-menu a{color:#fff}
-.site-header.transparent .nav-brand span{color:#fff}
-.site-header.transparent .nav-brand svg{color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.45))}
-.site-header.transparent .nav-toggle span{background:#fff}
+.site-header.transparent{position:fixed;top:0;left:0;right:0;background:transparent;border-bottom:0;z-index:120;transition:background 0.4s ease, border-color 0.4s ease}
+.site-header.transparent:hover{background:var(--bg);border-bottom:1px solid rgba(0,0,0,0.03)}
+.site-header.transparent .nav-menu a{color:#fff;transition:color 0.4s ease}
+.site-header.transparent:hover .nav-menu a{color:var(--text)}
+.site-header.transparent .nav-brand span{color:#fff;transition:color 0.4s ease}
+.site-header.transparent:hover .nav-brand span{color:var(--text)}
+.site-header.transparent .nav-brand svg{color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.45));transition:color 0.4s ease, filter 0.4s ease}
+.site-header.transparent:hover .nav-brand svg{color:var(--text);filter:drop-shadow(0 0 0 rgba(0,0,0,0))}
+.site-header.transparent .nav-toggle span{background:#fff;transition:background 0.4s ease}
+.site-header.transparent:hover .nav-toggle span{background:var(--text)}
 
 /* Force dark nav/logo on non-home pages to avoid white-on-white issues */
 .site-header:not(.transparent) .nav-link,

@@ -3,24 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - AACU</title>
-    <meta name="description" content="Learn about AACU's mission, beliefs, and community focus. We are a multicultural Christian church in Australia.">
-    <meta name="theme-color" content="#1a1a1a">
+    <title>About AACU - African Church Newcastle NSW | Our Mission & Beliefs</title>
+    <meta name="description" content="About AACU - African Australian Christian United in Shortland, Newcastle NSW. Learn our mission, beliefs, and community values. Welcoming Swahili and English speaking believers.">
+    <meta name="theme-color" content="#d4a574">
+    <meta name="keywords" content="AACU mission, African church Newcastle, Swahili community NSW, multicultural church Hunter, Christian values">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aacu-church.github.io/about.html">
-    <meta property="og:title" content="About Us - AACU">
-    <meta property="og:description" content="Learn about AACU's mission, beliefs, and community focus.">
-    <meta property="og:image" content="https://aacu-church.github.io/assets/img/og-image.png">
+    <meta property="og:url" content="https://jher6740.github.io/aacu-church/about.html">
+    <meta property="og:title" content="About AACU - African Church Newcastle NSW">
+    <meta property="og:description" content="Learn about AACU's mission, beliefs, and welcoming community in Shortland, Newcastle.">
+    <meta property="og:image" content="https://jher6740.github.io/aacu-church/assets/img/og-image.png">
+    <meta property="og:image:alt" content="AACU Community">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About AACU">
+    <meta name="twitter:description" content="Learn about AACU's mission and beliefs in Newcastle NSW">
+    <meta name="twitter:image" content="https://jher6740.github.io/aacu-church/assets/img/og-image.png">
     
-    <link rel="canonical" href="https://aacu-church.github.io/about.html">
+    <link rel="canonical" href="https://jher6740.github.io/aacu-church/about.html">
+    <link rel="alternate" hreflang="en" href="https://jher6740.github.io/aacu-church/about.html">
     <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./assets/css/minimal.css">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Church",
+        "name": "AACU - African Australian Christian United",
+        "url": "https://jher6740.github.io/aacu-church/about.html",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Shortland Public School",
+            "addressLocality": "Shortland",
+            "addressRegion": "NSW",
+            "postalCode": "2304",
+            "addressCountry": "AU"
+        },
+        "serviceLanguage": ["sw", "en"],
+        "availableLanguage": ["Swahili", "English"]
+    }
+    </script>
 </head>
 <body>
-    <!-- <a href="#main-content" class="skip-link">Skip to main content</a> -->
-    
     <header class="site-header">
         <nav class="navbar">
             <div class="nav-container">
@@ -35,7 +60,7 @@
                     </a>
                 </div>
                 
-                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -46,6 +71,7 @@
                     <li><a href="./about.html" class="nav-link active">About</a></li>
                     <li><a href="./services.html" class="nav-link">Services</a></li>
                     <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                    <li><button id="language-toggle" class="lang-toggle">English</button></li>
                 </ul>
             </div>
         </nav>
@@ -55,38 +81,39 @@
         <!-- Page Header -->
         <section class="page-header">
             <div class="container">
-                <h1>About Us</h1>
-                <p>Our story, beliefs, and commitment to community</p>
+                <h1 data-i18n="about-us-title">About Us</h1>
+                <p data-i18n="about-us-desc">Our story, mission, and commitment to community in Newcastle & Hunter Region</p>
             </div>
         </section>
         
         <!-- Who We Are -->
         <section class="content-section">
             <div class="container">
-                <h2>Who We Are</h2>
-                <p>AACU is a dynamic, multicultural Christian community. We are a family of believers united in faith, committed to worshiping together and serving our community.</p>
+                <h2 data-i18n="who-we-are-title">Who We Are</h2>
+                <p data-i18n="who-we-are-desc">AACU is a dynamic, multicultural African Christian community in Shortland, Newcastle NSW. We welcome believers from diverse African backgrounds, including Swahili-speaking communities and all seekers of faith. Our services are conducted in Swahili with English translation, ensuring everyone feels welcome and can participate fully.</p>
+                <p>We are a family united in faith, committed to worshiping together, growing in Christ, and serving our community with integrity and love.</p>
             </div>
         </section>
         
         <!-- What We Believe -->
         <section class="content-section">
             <div class="container">
-                <h2>What We Believe</h2>
+                <h2 data-i18n="believe-title">What We Believe</h2>
                 
                 <div class="belief-cards">
                     <div class="belief-card">
-                        <h3>God's Love</h3>
-                        <p>We believe in the transformative power of God's unconditional love for all people.</p>
+                        <h3 data-i18n="gods-love">God's Love</h3>
+                        <p data-i18n="gods-love-desc">We believe in the transformative power of God's unconditional love for all people, transcending boundaries of culture and background.</p>
                     </div>
                     
                     <div class="belief-card">
-                        <h3>Christ's Salvation</h3>
-                        <p>We trust in Jesus Christ as our Lord and Savior.</p>
+                        <h3 data-i18n="christs-salvation">Christ's Salvation</h3>
+                        <p data-i18n="christs-salvation-desc">We trust in Jesus Christ as our Lord and Savior, and in His redemptive work through death and resurrection.</p>
                     </div>
                     
                     <div class="belief-card">
-                        <h3>Community</h3>
-                        <p>We value growing together in Christian fellowship and service.</p>
+                        <h3 data-i18n="community-fellowship">Community & Fellowship</h3>
+                        <p data-i18n="community-fellowship-desc">We value growing together in Christian fellowship, prayer, service, and mutual support across all languages and cultures.</p>
                     </div>
                 </div>
             </div>
@@ -95,8 +122,8 @@
         <!-- CTA Section -->
         <section class="content-section cta-section">
             <div class="container">
-                <h2>Join Our Community</h2>
-                <p>Whether you're exploring faith or looking for a spiritual home, we'd love to meet you.</p>
+                <h2 data-i18n="join-community">Join Our Community</h2>
+                <p data-i18n="join-community-desc">Whether you're exploring faith, seeking a spiritual home, or want to connect with the African community in Newcastle, we welcome you. All services include Swahili and English.</p>
                 <a href="./contact.html" class="btn btn-primary">Get In Touch</a>
             </div>
         </section>
@@ -108,7 +135,7 @@
                 <div class="footer-section">
                     <h4>AACU</h4>
                     <p>African Australian Christian United</p>
-                    <p class="footer-tagline">A welcoming home for all believers.</p>
+                    <p class="footer-tagline">A welcoming spiritual home for all believers.</p>
                 </div>
                 
                 <div class="footer-section">
@@ -122,15 +149,22 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: <a href="mailto:info@aacu.church">info@aacu.church</a></p>
-                    <p>Phone: <a href="tel:+61212345678">+61 (2) 1234 5678</a></p>
-                    <p>Visit: Shortland Public School, Shortland NSW, Australia — <a href="https://www.google.com/maps/dir/?api=1&destination=Shortland+Public+School+Shortland+NSW+Australia" target="_blank" rel="noopener">Get directions</a></p>
+                    <h4>Contact & Location</h4>
+                    <p><strong>AACU</strong></p>
+                    <p>Shortland Public School<br>
+                    Shortland NSW 2304<br>
+                    Australia</p>
+                    <p>Email: <a href="mailto:info@aacu.church">info@aacu.church</a><br>
+                    Phone: <a href="tel:+61212345678">+61 (2) 1234 5678</a><br>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=Shortland+Public+School+Shortland+NSW+Australia" target="_blank" rel="noopener">Get directions →</a></p>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 AACU. All rights reserved. | <a href="#privacy">Privacy Policy</a></p>
+                <p>&copy; 2024 AACU - African Australian Christian United. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
             </div>
         </div>
     </footer>

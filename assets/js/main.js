@@ -181,6 +181,127 @@ function initializeCarousel() {
 }
 
 /**
+ * Language Toggle
+ * Switch between English and Swahili
+ */
+const translations = {
+    en: {
+        'welcome-title': 'Welcome to AACU',
+        'welcome-desc': 'African Australian Christian United. Worship in Shortland, Newcastle NSW with Swahili and English services. All are welcome.',
+        'join-us-title': 'Join Us Sundays & Saturdays',
+        'sunday-worship': 'Sunday Worship',
+        'swahili-english': 'Swahili with English translation',
+        'saturday-prayer': 'Saturday Prayer',
+        'community-prayer': 'Community prayer & intercession',
+        'service-details-btn': 'Service Details',
+        'get-in-touch-title': 'Get In Touch',
+        'get-in-touch-desc': 'Whether you\'re exploring faith or looking for a spiritual home in Newcastle and Hunter Region, we\'d love to meet you. All services include Swahili and English.',
+        'learn-about-us': 'Learn About Us',
+        'contact-us': 'Contact Us',
+        'about-us-title': 'About Us',
+        'about-us-desc': 'Our story, mission, and commitment to community in Newcastle & Hunter Region',
+        'who-we-are-title': 'Who We Are',
+        'who-we-are-desc': 'AACU is a dynamic, multicultural African Christian community in Shortland, Newcastle NSW. We welcome believers from diverse African backgrounds, including Swahili-speaking communities and all seekers of faith. Our services are conducted in Swahili with English translation, ensuring everyone feels welcome and can participate fully.',
+        'believe-title': 'What We Believe',
+        'gods-love': 'God\'s Love',
+        'gods-love-desc': 'We believe in the transformative power of God\'s unconditional love for all people, transcending boundaries of culture and background.',
+        'christs-salvation': 'Christ\'s Salvation',
+        'christs-salvation-desc': 'We trust in Jesus Christ as our Lord and Savior, and in His redemptive work through death and resurrection.',
+        'community-fellowship': 'Community & Fellowship',
+        'community-fellowship-desc': 'We value growing together in Christian fellowship, prayer, service, and mutual support across all languages and cultures.',
+        'join-community': 'Join Our Community',
+        'join-community-desc': 'Whether you\'re exploring faith, seeking a spiritual home, or want to connect with the African community in Newcastle, we welcome you. All services include Swahili and English.',
+        'services-title': 'Our Services',
+        'services-desc': 'Worship times, location, and what to expect at AACU in Newcastle NSW',
+        'service-times': 'Service Times',
+        'sunday-title': 'Sunday Worship',
+        'sunday-desc': 'Weekly worship service with music, biblical teaching, and fellowship. Kids & youth programs available. Conducted in Swahili with English translation.',
+        'saturday-title': 'Saturday Prayer',
+        'saturday-desc': 'Community prayer and intercession. Swahili and English welcome.',
+        'location-title': 'Location',
+        'visit-us': 'Visit Us',
+        'contact-form-title': 'Send us a message',
+        'contact-form-desc': 'Services available in Swahili with English translation. Feel free to contact us in either language!',
+    },
+    sw: {
+        'welcome-title': 'Karibu AACU',
+        'welcome-desc': 'Kanisa la Wakristo wa Australia. Kumba Shortland, Newcastle NSW na huduma za Kiswahili na Kingereza. Kila mtu ana karibu.',
+        'join-us-title': 'Jitokeze Siku za Jumapili & Jumamosi',
+        'sunday-worship': 'Ibada ya Jumapili',
+        'swahili-english': 'Kiswahili na tafsiri ya Kingereza',
+        'saturday-prayer': 'Sala ya Jumamosi',
+        'community-prayer': 'Sala na kuomba kwa jamii',
+        'service-details-btn': 'Maelezo ya Huduma',
+        'get-in-touch-title': 'Wasiliana Nasi',
+        'get-in-touch-desc': 'Iwe unachunguza imani au unatafuta nyumba ya roho katika Newcastle na Hunter Region, tunataka kukuona. Huduma zote zina Kiswahili na Kingereza.',
+        'learn-about-us': 'Jifunze Kuhusu Sisi',
+        'contact-us': 'Wasiliana',
+        'about-us-title': 'Kuhusu Sisi',
+        'about-us-desc': 'Hadithi yetu, lengo letu, na hati yetu kwa jamii katika Newcastle & Hunter Region',
+        'who-we-are-title': 'Nani Tunavyo Kuwa',
+        'who-we-are-desc': 'AACU ni jamii ya kidini ya Wakristo wa Afrika ya nguvu katika Shortland, Newcastle NSW. Tunamkaribisha waumini kutoka nyakati mbalimbali za Afrika, ikiwa na jumuiya inayosema Kiswahili na wote wanatafuta imani. Huduma zetu zinafanywa kwa Kiswahili na tafsiri ya Kingereza, na kuhakikisha wote wanavyohisi karibu na yanaweza kushiriki kabisa.',
+        'believe-title': 'Nini Tunavyoamini',
+        'gods-love': 'Upendo wa Mungu',
+        'gods-love-desc': 'Tunaaminiana na nguvu ya kugeuza ya upendo wa Mungu usio na masharti kwa watu wote, ukizidi mipaka ya tamaduni na asili.',
+        'christs-salvation': 'Wokfu wa Kristo',
+        'christs-salvation-desc': 'Tunaitegemea Yesu Kristo kuwa Bwana na Mwokozi wetu, na kazi yake ya kukomboa kupitia kifo na ufufuo.',
+        'community-fellowship': 'Jamii & Ushirikiano',
+        'community-fellowship-desc': 'Tunapendeza kukua pamoja katika ushirikiano wa kidini, sala, huduma, na msaada wa pande zote katika lugha na tamaduni zote.',
+        'join-community': 'Jiunze Jamii Yetu',
+        'join-community-desc': 'Iwe unachunguza imani, kutafuta nyumba ya roho, au unataka kuunganisha na jumuiya ya Afrika katika Newcastle, tunamkaribisha. Huduma zote zina Kiswahili na Kingereza.',
+        'services-title': 'Huduma Zetu',
+        'services-desc': 'Muda wa ibada, mahali, na nini kitarajiwa AACU Newcastle NSW',
+        'service-times': 'Muda wa Huduma',
+        'sunday-title': 'Ibada ya Jumapili',
+        'sunday-desc': 'Huduma ya ibada kila wiki na muziki, ufundisho wa Biblia, na ushirikiano. Programu za watoto na vijana zinapatikana. Inafanywa kwa Kiswahili na tafsiri ya Kingereza.',
+        'saturday-title': 'Sala ya Jumamosi',
+        'saturday-desc': 'Sala na kuomba kwa jamii. Kiswahili na Kingereza vinakubali.',
+        'location-title': 'Mahali',
+        'visit-us': 'Tembelea Sisi',
+        'contact-form-title': 'Tumpeleka ujumbe',
+        'contact-form-desc': 'Huduma zinapatikana kwa Kiswahili na tafsiri ya Kingereza. Karibu kuwasiliana nasi katika lugha yoyote!',
+    }
+};
+
+function initializeLanguageToggle() {
+    const toggle = document.getElementById('language-toggle');
+    if (!toggle) return;
+    
+    // Load saved language preference
+    const savedLanguage = localStorage.getItem('aacu-language') || 'en';
+    let currentLanguage = savedLanguage;
+    updateLanguageButton(currentLanguage);
+    
+    toggle.addEventListener('click', () => {
+        currentLanguage = currentLanguage === 'en' ? 'sw' : 'en';
+        localStorage.setItem('aacu-language', currentLanguage);
+        updateLanguageButton(currentLanguage);
+        applyTranslations(currentLanguage);
+    });
+    
+    // Apply saved language on page load
+    if (savedLanguage === 'sw') {
+        applyTranslations('sw');
+    }
+}
+
+function updateLanguageButton(lang) {
+    const toggle = document.getElementById('language-toggle');
+    if (toggle) {
+        toggle.textContent = lang === 'en' ? 'Swahili' : 'English';
+    }
+}
+
+function applyTranslations(lang) {
+    Object.keys(translations[lang]).forEach(key => {
+        const elements = document.querySelectorAll(`[data-i18n="${key}"]`);
+        elements.forEach(element => {
+            element.textContent = translations[lang][key];
+        });
+    });
+}
+
+/**
  * Navigation Toggle
  * Handles mobile menu toggle functionality
  */
@@ -501,6 +622,7 @@ function initialize() {
     initializeAnnouncementsBanner();
     initializeContactForm();
     initializeKeyboardNavigation();
+    initializeLanguageToggle();
     
     // Enhancements
     initializeSmoothScroll();
@@ -519,9 +641,23 @@ function initialize() {
  * Run initialization when DOM is ready
  */
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initialize);
+    document.addEventListener('DOMContentLoaded', () => {
+        initialize();
+        // Apply saved language preference after everything is initialized
+        const savedLanguage = localStorage.getItem('aacu-language') || 'en';
+        if (savedLanguage === 'sw') {
+            applyTranslations('sw');
+            updateLanguageButton('sw');
+        }
+    });
 } else {
     initialize();
+    // Apply saved language preference after everything is initialized
+    const savedLanguage = localStorage.getItem('aacu-language') || 'en';
+    if (savedLanguage === 'sw') {
+        applyTranslations('sw');
+        updateLanguageButton('sw');
+    }
 }
 
 /**
@@ -531,5 +667,7 @@ if (document.readyState === 'loading') {
 window.AACU = {
     toggleAnnouncements: toggleAnnouncements,
     updateAnnouncementsContent: updateAnnouncementsContent,
-    setActiveNavLink: setActiveNavLink
+    setActiveNavLink: setActiveNavLink,
+    initializeLanguageToggle: initializeLanguageToggle,
+    applyTranslations: applyTranslations
 };

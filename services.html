@@ -3,24 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - AACU</title>
-    <meta name="description" content="AACU worship services, times, location, and what to expect. We welcome all believers to join our community.">
-    <meta name="theme-color" content="#1a1a1a">
+    <title>Services & Worship Times - AACU Newcastle NSW | Swahili & English</title>
+    <meta name="description" content="AACU Services: Sunday & Saturday worship in Shortland, Newcastle NSW. Swahili with English translation. Service times, location, directions, and what to expect.">
+    <meta name="theme-color" content="#d4a574">
+    <meta name="keywords" content="church services Newcastle, Sunday worship, Swahili service NSW, prayer meeting Hunter, church Shortland">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aacu-church.github.io/services.html">
-    <meta property="og:title" content="Services - AACU">
-    <meta property="og:description" content="AACU worship services, times, and location.">
-    <meta property="og:image" content="https://aacu-church.github.io/assets/img/og-image.png">
+    <meta property="og:url" content="https://jher6740.github.io/aacu-church/services.html">
+    <meta property="og:title" content="Services & Worship Times - AACU Newcastle NSW">
+    <meta property="og:description" content="AACU Services in Swahili & English. Sunday & Saturday at 10:00 AM, Shortland Public School, Newcastle NSW.">
+    <meta property="og:image" content="https://jher6740.github.io/aacu-church/assets/img/og-image.png">
+    <meta property="og:image:alt" content="AACU Worship Service">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Services & Worship Times - AACU">
+    <meta name="twitter:description" content="Sunday & Saturday worship in Swahili & English, Shortland NSW">
+    <meta name="twitter:image" content="https://jher6740.github.io/aacu-church/assets/img/og-image.png">
     
-    <link rel="canonical" href="https://aacu-church.github.io/services.html">
+    <link rel="canonical" href="https://jher6740.github.io/aacu-church/services.html">
+    <link rel="alternate" hreflang="en" href="https://jher6740.github.io/aacu-church/services.html">
     <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./assets/css/minimal.css">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Church",
+        "name": "AACU - African Australian Christian United",
+        "serviceLanguage": ["sw", "en"],
+        "event": [
+            {
+                "@type": "Event",
+                "name": "Sunday Worship Service",
+                "startDate": "2024-02-11T10:00",
+                "recurrenceRule": "FREQ=WEEKLY;BYDAY=SU",
+                "location": {
+                    "@type": "Place",
+                    "name": "Shortland Public School",
+                    "address": "Shortland NSW 2304"
+                },
+                "description": "Worship service in Swahili with English translation"
+            },
+            {
+                "@type": "Event",
+                "name": "Saturday Prayer Meeting",
+                "startDate": "2024-02-10T10:00",
+                "recurrenceRule": "FREQ=WEEKLY;BYDAY=SA",
+                "location": {
+                    "@type": "Place",
+                    "name": "Shortland Public School",
+                    "address": "Shortland NSW 2304"
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
-    <!-- <a href="#main-content" class="skip-link">Skip to main content</a> -->
-    
     <header class="site-header">
         <nav class="navbar">
             <div class="nav-container">
@@ -34,8 +74,8 @@
                         <span>AACU</span>
                     </a>
                 </div>
-                
-                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -46,6 +86,7 @@
                     <li><a href="./about.html" class="nav-link">About</a></li>
                     <li><a href="./services.html" class="nav-link active">Services</a></li>
                     <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                    <li><button id="language-toggle" class="lang-toggle">English</button></li>
                 </ul>
             </div>
         </nav>
@@ -55,30 +96,30 @@
         <!-- Page Header -->
         <section class="page-header">
             <div class="container">
-                <h1>Our Services</h1>
-                <p>When and where to worship with AACU</p>
+                <h1 data-i18n="services-title">Our Services</h1>
+                <p data-i18n="services-desc">Worship times, location, and what to expect at AACU in Newcastle NSW</p>
             </div>
         </section>
         
         <!-- Service Times -->
         <section class="content-section">
             <div class="container">
-                <h2>Service Times</h2>
+                <h2 data-i18n="service-times">Service Times</h2>
                 
                 <div class="service-times-grid">
                     <div class="service-time-card">
-                        <h3>Sunday Worship</h3>
+                        <h3 data-i18n="sunday-title">Sunday Worship</h3>
                         <div class="time-block">
                             <p class="time-value">10:00 AM</p>
                         </div>
-                        <p class="service-description">Worship, teaching, and prayer. Kids & youth programs available.</p>
+                        <p class="service-description" data-i18n="sunday-desc">Weekly worship service with music, biblical teaching, and fellowship. Kids & youth programs available. Conducted in Swahili with English translation.</p>
                     </div>
                     <div class="service-time-card">
-                        <h3>Saturday Prayer</h3>
+                        <h3 data-i18n="saturday-title">Saturday Prayer</h3>
                         <div class="time-block">
                             <p class="time-value">10:00 AM</p>
                         </div>
-                        <p class="service-description">Community prayer congregation.</p>
+                        <p class="service-description" data-i18n="saturday-desc">Community prayer and intercession. Swahili and English welcome.</p>
                     </div>
                 </div>
             </div>
@@ -87,30 +128,32 @@
         <!-- Location & Directions -->
         <section class="content-section">
             <div class="container">
-                <h2>Location</h2>
+                <h2 data-i18n="location-title">Location</h2>
                 
                 <div class="location-block">
                     <div class="location-info">
-                        <h3>Visit Us</h3>
+                        <h3 data-i18n="visit-us">Visit Us</h3>
                         <address>
                             <p><strong>AACU</strong></p>
                             <p>Shortland Public School<br>
-                            Shortland, NSW<br>
+                            Shortland NSW 2304<br>
                             Australia</p>
                         </address>
                         
                         <p class="directions-note">
-                            <strong>Getting Here:</strong> Located in Shortland. Parking is available on campus. 
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=Shortland+Public+School+Shortland+NSW+Australia" target="_blank" rel="noopener noreferrer">Get directions on Google Maps →</a>
+                            <strong>Getting Here:</strong> Located in Shortland, Newcastle. Parking available. Accessible to Hunter Region.
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=Shortland+Public+School+Shortland+NSW+Australia" target="_blank" rel="noopener">Get directions on Google Maps →</a>
                         </p>
                     </div>
                     
                     <div class="location-map map-embed" aria-hidden="false">
-                        <iframe src="https://www.google.com/maps?q=Shortland+Public+School+Shortland+NSW+Australia&output=embed" loading="lazy" title="Map: Shortland Public School"></iframe>
+                        <iframe src="https://www.google.com/maps?q=Shortland+Public+School+Shortland+NSW+Australia&output=embed" loading="lazy" title="Map: Shortland Public School, Newcastle NSW"></iframe>
                     </div>
                 </div>
             </div>
         </section>
+        
+
         
         <!-- What to Expect
         <section class="content-section">
@@ -205,7 +248,7 @@
                 <div class="footer-section">
                     <h4>AACU</h4>
                     <p>African Australian Christian United</p>
-                    <p class="footer-tagline">A welcoming home for all believers.</p>
+                    <p class="footer-tagline">A welcoming spiritual home for all believers.</p>
                 </div>
                 
                 <div class="footer-section">
@@ -219,19 +262,19 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: <a href="mailto:info@aacu.church">info@aacu.church</a></p>
-                    <p>Phone: <a href="tel:+61212345678">+61 (2) 1234 5678</a></p>
-                    <p>Visit: Shortland Public School, Shortland NSW, Australia — <a href="https://www.google.com/maps/dir/?api=1&destination=Shortland+Public+School+Shortland+NSW+Australia" target="_blank" rel="noopener">Get directions</a></p>
+                    <h4>Contact & Location</h4>
+                    <p><strong>AACU</strong></p>
+                    <p>Shortland Public School<br>
+                    Shortland NSW 2304<br>
+                    Australia</p>
+                    <p>Email: <a href="mailto:info@aacu.church">info@aacu.church</a><br>
+                    Phone: <a href="tel:+61212345678">+61 (2) 1234 5678</a><br>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=Shortland+Public+School+Shortland+NSW+Australia" target="_blank" rel="noopener">Get directions →</a></p>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 AACU. All rights reserved. | <a href="#privacy">Privacy Policy</a></p>
-            </div>
-        </div>
-    </footer>
-    
+                <p>&copy; 2024 AACU - African Australian Christian United. All rights reserved.</p>
     <script src="./assets/js/main.js"></script>
 </body>
 </html>
