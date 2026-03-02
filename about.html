@@ -6,7 +6,7 @@
     <title>About AACU - African Church Newcastle NSW | Mission & Community Values</title>
     <meta name="description" content="About AACU in Shortland, Newcastle NSW. Church mission, beliefs, and community information.">
     <meta name="theme-color" content="#d4a574">
-    <meta name="keywords" content="African church mission, AACU Newcastle, Swahili Christian community, multicultural church Australia, Christian values Hunter Region">
+    <meta name="keywords" content="African church mission, AACU Newcastle, Swahili Christian community, multicultural church Australia, Christian values Hunter Region, kuhusu kanisa la kiswahili newcastle, kanisa la waafrika australia">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
@@ -15,6 +15,8 @@
     <meta property="og:description" content="About AACU mission and church values in Newcastle NSW.">
     <meta property="og:image" content="https://aacu-church.org/assets/img/og-image.png">
     <meta property="og:image:alt" content="AACU Community">
+    <meta property="og:locale" content="en_AU">
+    <meta property="og:locale:alternate" content="sw_KE">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="About AACU">
     <meta name="twitter:description" content="Our mission and Christian values in Newcastle NSW">
@@ -22,6 +24,8 @@
     
     <link rel="canonical" href="https://aacu-church.org/about.html">
     <link rel="alternate" hreflang="en" href="https://aacu-church.org/about.html">
+    <link rel="alternate" hreflang="sw" href="https://aacu-church.org/about.html?lang=sw">
+    <link rel="alternate" hreflang="x-default" href="https://aacu-church.org/about.html">
     <link rel="icon" href="./assets/img/aacu_logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./assets/css/minimal.css">
     
@@ -63,11 +67,11 @@
                 </button>
                 
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="./index.html" class="nav-link">Home</a></li>
-                    <li><a href="./about.html" class="nav-link active">About</a></li>
-                    <li><a href="./services.html" class="nav-link">Services</a></li>
-                    <li><a href="./gallery.html" class="nav-link">Gallery</a></li>
-                    <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="./index.html" class="nav-link" data-i18n="nav-home">Home</a></li>
+                    <li><a href="./about.html" class="nav-link active" data-i18n="nav-about">About</a></li>
+                    <li><a href="./services.html" class="nav-link" data-i18n="nav-services">Services</a></li>
+                    <li><a href="./gallery.html" class="nav-link" data-i18n="nav-gallery">Gallery</a></li>
+                    <li><a href="./contact.html" class="nav-link" data-i18n="nav-contact">Contact</a></li>
                     <li><button id="language-toggle" class="lang-toggle">English</button></li>
                 </ul>
             </div>
@@ -88,7 +92,7 @@
             <div class="container">
                 <h2 data-i18n="who-we-are-title">Who We Are</h2>
                 <p data-i18n="who-we-are-desc">AACU is an African Christian church in Shortland, Newcastle NSW. Services run in Swahili with English translation.</p>
-                <p>AACU meets for worship, prayer, and fellowship each week.</p>
+                <p data-i18n="who-we-are-extra">AACU meets for worship, prayer, and fellowship each week.</p>
             </div>
         </section>
         
@@ -127,7 +131,7 @@
             <div class="container">
                 <h2 data-i18n="join-community">Join Our Community</h2>
                 <p data-i18n="join-community-desc">Join AACU for worship, prayer, and fellowship in Newcastle.</p>
-                <a href="./contact.html" class="btn btn-primary">Get In Touch</a>
+                <a href="./contact.html" class="btn btn-primary" data-i18n="cta-get-in-touch">Get In Touch</a>
             </div>
         </section>
     </main>
@@ -142,13 +146,13 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4 data-i18n="footer-quick-links">Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="./index.html">Home</a></li>
-                        <li><a href="./about.html">About Us</a></li>
-                        <li><a href="./services.html">Services</a></li>
-                        <li><a href="./gallery.html">Gallery</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="./index.html" data-i18n="footer-home">Home</a></li>
+                        <li><a href="./about.html" data-i18n="footer-about">About Us</a></li>
+                        <li><a href="./services.html" data-i18n="footer-services">Services</a></li>
+                        <li><a href="./gallery.html" data-i18n="footer-gallery">Gallery</a></li>
+                        <li><a href="./contact.html" data-i18n="footer-contact">Contact</a></li>
                     </ul>
                 </div>
                 
@@ -166,9 +170,6 @@
             
             <div class="footer-bottom">
                 <p>&copy; 2024 AACU - African Australian Christian United. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
             </div>
         </div>
     </footer>

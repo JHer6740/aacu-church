@@ -6,7 +6,7 @@
     <title>Church Services & Worship Times - AACU Newcastle | Swahili & English</title>
     <meta name="description" content="AACU service times in Shortland, Newcastle NSW. Sunday worship and Saturday prayer at 10:00 AM with Swahili and English.">
     <meta name="theme-color" content="#d4a574">
-    <meta name="keywords" content="African church services Newcastle, Sunday worship Australia, Swahili service NSW, prayer meeting Hunter, church Shortland NSW, bilingual worship">
+    <meta name="keywords" content="African church services Newcastle, Sunday worship Australia, Swahili service NSW, prayer meeting Hunter, church Shortland NSW, bilingual worship, ratiba ya ibada newcastle, ibada ya kiswahili nsw">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
@@ -15,6 +15,8 @@
     <meta property="og:description" content="AACU Sunday and Saturday services at 10:00 AM in Shortland, Newcastle NSW.">
     <meta property="og:image" content="https://aacu-church.org/assets/img/og-image.png">
     <meta property="og:image:alt" content="AACU Worship Service">
+    <meta property="og:locale" content="en_AU">
+    <meta property="og:locale:alternate" content="sw_KE">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Services & Worship Times - AACU">
     <meta name="twitter:description" content="Bilingual worship in Swahili & English, Sundays & Saturdays in Newcastle.">
@@ -22,6 +24,8 @@
     
     <link rel="canonical" href="https://aacu-church.org/services.html">
     <link rel="alternate" hreflang="en" href="https://aacu-church.org/services.html">
+    <link rel="alternate" hreflang="sw" href="https://aacu-church.org/services.html?lang=sw">
+    <link rel="alternate" hreflang="x-default" href="https://aacu-church.org/services.html">
     <link rel="icon" href="./assets/img/aacu_logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./assets/css/minimal.css">
     
@@ -32,6 +36,9 @@
         "@type": "Church",
         "name": "AACU - African Australian Christian United",
         "url": "https://aacu-church.org/services.html",
+        "serviceLanguage": ["sw", "en"],
+        "availableLanguage": ["Swahili", "English"],
+        "event": [
             {
                 "@type": "Event",
                 "name": "Sunday Worship Service",
@@ -53,7 +60,8 @@
                     "@type": "Place",
                     "name": "Shortland Public School",
                     "address": "Shortland NSW 2304"
-                }
+                },
+                "description": "Prayer service in Swahili with English translation"
             }
         ]
     }
@@ -77,11 +85,11 @@
                 </button>
                 
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="./index.html" class="nav-link">Home</a></li>
-                    <li><a href="./about.html" class="nav-link">About</a></li>
-                    <li><a href="./services.html" class="nav-link active">Services</a></li>
-                    <li><a href="./gallery.html" class="nav-link">Gallery</a></li>
-                    <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="./index.html" class="nav-link" data-i18n="nav-home">Home</a></li>
+                    <li><a href="./about.html" class="nav-link" data-i18n="nav-about">About</a></li>
+                    <li><a href="./services.html" class="nav-link active" data-i18n="nav-services">Services</a></li>
+                    <li><a href="./gallery.html" class="nav-link" data-i18n="nav-gallery">Gallery</a></li>
+                    <li><a href="./contact.html" class="nav-link" data-i18n="nav-contact">Contact</a></li>
                     <li><button id="language-toggle" class="lang-toggle">English</button></li>
                 </ul>
             </div>
@@ -248,13 +256,13 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4 data-i18n="footer-quick-links">Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="./index.html">Home</a></li>
-                        <li><a href="./about.html">About Us</a></li>
-                        <li><a href="./services.html">Services</a></li>
-                        <li><a href="./gallery.html">Gallery</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="./index.html" data-i18n="footer-home">Home</a></li>
+                        <li><a href="./about.html" data-i18n="footer-about">About Us</a></li>
+                        <li><a href="./services.html" data-i18n="footer-services">Services</a></li>
+                        <li><a href="./gallery.html" data-i18n="footer-gallery">Gallery</a></li>
+                        <li><a href="./contact.html" data-i18n="footer-contact">Contact</a></li>
                     </ul>
                 </div>
                 

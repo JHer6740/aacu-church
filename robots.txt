@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aacu-church.org/sitemap.xml

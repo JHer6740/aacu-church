@@ -54,11 +54,12 @@ const IMAGE_LIBRARY = [
     './images/IMG_4750.JPG',
     './images/IMG_4751.JPG',
     './images/IMG_4754.JPG',
-    './images/IMG_4756.JPG',
     './images/IMG_4760.JPG',
     './images/IMG_4763.JPG',
     './images/IMG_4764.JPG',
-    './images/IMG_4765.JPG'
+    './images/IMG_4765.JPG',
+    './images/image.jpeg',
+    './images/image 2.jpeg'
 ];
 
 function hashDateToSeed(date) {
@@ -308,6 +309,16 @@ const PHOTO_METADATA_OVERRIDES = {
         event: 'Sunday Service',
         eventSw: 'Ibada ya Jumapili',
         location: 'Shortland Public School, Shortland NSW'
+    },
+    'image.jpeg': {
+        event: 'Sunday Service',
+        eventSw: 'Ibada ya Jumapili',
+        location: 'Shortland Public School, Shortland NSW'
+    },
+    'image 2.jpeg': {
+        event: 'Sunday Service',
+        eventSw: 'Ibada ya Jumapili',
+        location: 'Shortland Public School, Shortland NSW'
     }
 };
 
@@ -325,7 +336,6 @@ const PHOTOS_2025_04_19 = new Set([
     'IMG_4750.JPG',
     'IMG_4751.JPG',
     'IMG_4754.JPG',
-    'IMG_4756.JPG',
     'IMG_4760.JPG',
     'IMG_4763.JPG',
     'IMG_4764.JPG',
@@ -370,9 +380,137 @@ function getGalleryUiText(lang) {
     return GALLERY_UI_TEXT[lang] || GALLERY_UI_TEXT.en;
 }
 
+const LANGUAGE_STORAGE_KEY = 'aacu-language';
+const DEFAULT_LANGUAGE = 'en';
+const SUPPORTED_LANGUAGES = ['en', 'sw'];
+const SEARCH_ENGINE_HOST_MARKERS = ['google.', 'bing.', 'duckduckgo.', 'yahoo.', 'yandex.'];
+const SWAHILI_SEARCH_KEYWORDS = [
+    'kiswahili',
+    'swahili',
+    'kanisa',
+    'ibada',
+    'maombi',
+    'jumapili',
+    'jumamosi',
+    'ubatizo',
+    'mungu',
+    'yesu',
+    'wakristo',
+    'newcastle',
+    'aacu'
+];
+
+function normalizeLanguageCode(value) {
+    if (!value) return null;
+    const normalized = String(value).trim().toLowerCase().replace('lang_', '').split('-')[0];
+    return SUPPORTED_LANGUAGES.includes(normalized) ? normalized : null;
+}
+
+function getStoredLanguage() {
+    try {
+        return normalizeLanguageCode(localStorage.getItem(LANGUAGE_STORAGE_KEY));
+    } catch (_error) {
+        return null;
+    }
+}
+
+function setStoredLanguage(lang) {
+    const normalized = normalizeLanguageCode(lang);
+    if (!normalized) return;
+    try {
+        localStorage.setItem(LANGUAGE_STORAGE_KEY, normalized);
+    } catch (_error) {
+        // Ignore storage failures in restricted/private contexts.
+    }
+}
+
+function getLanguageFromQueryParam() {
+    const params = new URLSearchParams(window.location.search);
+    return normalizeLanguageCode(params.get('lang'));
+}
+
+function isSearchEngineReferrer(hostname) {
+    return SEARCH_ENGINE_HOST_MARKERS.some((marker) => hostname.includes(marker));
+}
+
+function getLanguageFromReferrer() {
+    if (!document.referrer) return null;
+
+    try {
+        const referrerUrl = new URL(document.referrer);
+        if (!isSearchEngineReferrer(referrerUrl.hostname.toLowerCase())) return null;
+
+        const params = referrerUrl.searchParams;
+        const languageFromParams = normalizeLanguageCode(
+            params.get('hl') || params.get('lang') || params.get('lr')
+        );
+        if (languageFromParams === 'sw') return 'sw';
+
+        const searchQuery = (
+            params.get('q') ||
+            params.get('query') ||
+            params.get('p') ||
+            params.get('text') ||
+            params.get('wd') ||
+            ''
+        ).toLowerCase();
+        if (!searchQuery) return null;
+
+        const hasSwahiliKeyword = SWAHILI_SEARCH_KEYWORDS.some((keyword) => searchQuery.includes(keyword));
+        return hasSwahiliKeyword ? 'sw' : null;
+    } catch (_error) {
+        return null;
+    }
+}
+
+function getLanguageFromBrowser() {
+    const preferredLanguages = Array.isArray(navigator.languages) && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language];
+
+    const hasSwahili = preferredLanguages.some((value) => normalizeLanguageCode(value) === 'sw');
+    return hasSwahili ? 'sw' : null;
+}
+
+function determineInitialLanguage() {
+    const languageFromQuery = getLanguageFromQueryParam();
+    if (languageFromQuery) {
+        setStoredLanguage(languageFromQuery);
+        return languageFromQuery;
+    }
+
+    const storedLanguage = getStoredLanguage();
+    if (storedLanguage) return storedLanguage;
+
+    const languageFromReferrer = getLanguageFromReferrer();
+    if (languageFromReferrer) {
+        setStoredLanguage(languageFromReferrer);
+        return languageFromReferrer;
+    }
+
+    const languageFromBrowser = getLanguageFromBrowser();
+    if (languageFromBrowser) {
+        setStoredLanguage(languageFromBrowser);
+        return languageFromBrowser;
+    }
+
+    return DEFAULT_LANGUAGE;
+}
+
 function getCurrentLanguage() {
-    const savedLanguage = localStorage.getItem('aacu-language');
-    return savedLanguage === 'sw' ? 'sw' : 'en';
+    return normalizeLanguageCode(document.documentElement.lang) || getStoredLanguage() || DEFAULT_LANGUAGE;
+}
+
+function updateLanguageQueryParam(lang) {
+    if (!window.history || typeof window.history.replaceState !== 'function') return;
+    const normalized = normalizeLanguageCode(lang) || DEFAULT_LANGUAGE;
+    const url = new URL(window.location.href);
+    if (normalized === 'sw') {
+        url.searchParams.set('lang', 'sw');
+    } else {
+        url.searchParams.delete('lang');
+    }
+    window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
 }
 
 function formatPhotoDate(dateKey, lang = 'en') {
@@ -598,6 +736,17 @@ function initializeGallery() {
  */
 const translations = {
     en: {
+        'nav-home': 'Home',
+        'nav-about': 'About',
+        'nav-services': 'Services',
+        'nav-gallery': 'Gallery',
+        'nav-contact': 'Contact',
+        'footer-quick-links': 'Quick Links',
+        'footer-home': 'Home',
+        'footer-about': 'About Us',
+        'footer-services': 'Services',
+        'footer-gallery': 'Gallery',
+        'footer-contact': 'Contact',
         'welcome-title': 'Welcome to AACU',
         'welcome-desc': 'Swahili and English worship in Shortland, Newcastle NSW.',
         'join-us-title': 'Service Times',
@@ -614,6 +763,7 @@ const translations = {
         'about-us-desc': 'Church history and mission in Newcastle and the Hunter region.',
         'who-we-are-title': 'Who We Are',
         'who-we-are-desc': 'AACU is an African Christian church in Shortland, Newcastle NSW. Services run in Swahili with English translation.',
+        'who-we-are-extra': 'AACU meets for worship, prayer, and fellowship each week.',
         'believe-title': 'What We Believe',
         'gods-love': 'God\'s Love',
         'gods-love-desc': 'God loves all people.',
@@ -634,10 +784,24 @@ const translations = {
         'visit-us': 'Visit Us',
         'contact-form-title': 'Send us a message',
         'contact-form-desc': 'Write to AACU in Swahili or English.',
+        'contact-page-title': 'Contact AACU',
+        'contact-page-desc': 'Use this page for service details, prayer requests, and visit information.',
+        'cta-get-in-touch': 'Get In Touch',
         'gallery-title': 'Gallery',
         'gallery-desc': 'AACU church event photo archive.'
     },
     sw: {
+        'nav-home': 'Mwanzo',
+        'nav-about': 'Kuhusu',
+        'nav-services': 'Huduma',
+        'nav-gallery': 'Picha',
+        'nav-contact': 'Wasiliana',
+        'footer-quick-links': 'Viungo vya Haraka',
+        'footer-home': 'Mwanzo',
+        'footer-about': 'Kuhusu Sisi',
+        'footer-services': 'Huduma',
+        'footer-gallery': 'Picha',
+        'footer-contact': 'Wasiliana',
         'welcome-title': 'Karibu AACU',
         'welcome-desc': 'Ibada kwa Kiswahili na Kiingereza, Shortland, Newcastle NSW.',
         'join-us-title': 'Ratiba ya Ibada',
@@ -654,6 +818,7 @@ const translations = {
         'about-us-desc': 'Historia ya kanisa na huduma yake Newcastle na Hunter.',
         'who-we-are-title': 'Nani Tunavyo Kuwa',
         'who-we-are-desc': 'AACU ni kanisa la Kikristo la Waafrika, Shortland, Newcastle NSW. Ibada ni kwa Kiswahili na tafsiri ya Kiingereza.',
+        'who-we-are-extra': 'AACU hukutana kila wiki kwa ibada, maombi, na ushirika.',
         'believe-title': 'Nini Tunavyoamini',
         'gods-love': 'Upendo wa Mungu',
         'gods-love-desc': 'Mungu anawapenda watu wote.',
@@ -674,32 +839,162 @@ const translations = {
         'visit-us': 'Tembelea Sisi',
         'contact-form-title': 'Tumpeleka ujumbe',
         'contact-form-desc': 'Andika kwa AACU kwa Kiswahili au Kiingereza.',
+        'contact-page-title': 'Wasiliana na AACU',
+        'contact-page-desc': 'Tumia ukurasa huu kwa ratiba ya ibada, maombi, na taarifa za kutembelea.',
+        'cta-get-in-touch': 'Wasiliana Nasi',
         'gallery-title': 'Picha',
         'gallery-desc': 'Kumbukumbu ya picha za matukio ya kanisa la AACU.'
     }
 };
 
+const SEO_PAGE_CONTENT = {
+    'index.html': {
+        en: {
+            title: 'AACU - African Church Newcastle NSW | Swahili & English Worship Services',
+            description: 'AACU church in Shortland, Newcastle NSW. Swahili and English worship at 10:00 AM on Sunday and Saturday.',
+            keywords: 'African church Newcastle NSW, Swahili church Australia, African Christian community, Hunter Region church, Shortland worship, multicultural church Newcastle',
+            ogTitle: 'AACU - African Church Newcastle NSW',
+            ogDescription: 'AACU church in Shortland, Newcastle NSW. Swahili and English worship services.',
+            twitterTitle: 'AACU - African Church Newcastle NSW',
+            twitterDescription: 'Swahili & English worship services. Welcoming African Christian community in Newcastle.'
+        },
+        sw: {
+            title: 'AACU - Kanisa la Kiafrika Newcastle NSW | Ibada kwa Kiswahili na Kiingereza',
+            description: 'AACU ni kanisa la Wakristo wa Afrika, Shortland Newcastle NSW. Ibada kwa Kiswahili na Kiingereza kila Jumapili na Jumamosi saa 10:00.',
+            keywords: 'kanisa la kiswahili newcastle, kanisa la kiafrika australia, ibada ya kiswahili nsw, kanisa la newcastle, AACU, wakristo waafrika',
+            ogTitle: 'AACU - Kanisa la Kiswahili Newcastle NSW',
+            ogDescription: 'AACU ni kanisa la Wakristo wa Afrika Newcastle NSW lenye ibada kwa Kiswahili na Kiingereza.',
+            twitterTitle: 'AACU - Kanisa la Kiswahili Newcastle',
+            twitterDescription: 'Ibada kwa Kiswahili na Kiingereza Newcastle NSW. Karibu AACU.'
+        }
+    },
+    'about.html': {
+        en: {
+            title: 'About AACU - African Church Newcastle NSW | Mission & Community Values',
+            description: 'About AACU in Shortland, Newcastle NSW. Church mission, beliefs, and community information.',
+            keywords: 'African church mission, AACU Newcastle, Swahili Christian community, multicultural church Australia, Christian values Hunter Region',
+            ogTitle: 'About AACU - African Church Newcastle NSW',
+            ogDescription: 'About AACU mission and church values in Newcastle NSW.',
+            twitterTitle: 'About AACU',
+            twitterDescription: 'Our mission and Christian values in Newcastle NSW'
+        },
+        sw: {
+            title: 'Kuhusu AACU | Kanisa la Kiswahili Newcastle NSW',
+            description: 'Jifunze kuhusu AACU huko Shortland, Newcastle NSW. Historia ya kanisa, imani, na huduma kwa jamii.',
+            keywords: 'kuhusu kanisa la kiswahili, AACU newcastle, kanisa la waafrika nsw, imani ya kikristo newcastle',
+            ogTitle: 'Kuhusu AACU - Kanisa la Kiswahili Newcastle',
+            ogDescription: 'Historia na maadili ya AACU katika Newcastle NSW.',
+            twitterTitle: 'Kuhusu AACU',
+            twitterDescription: 'Historia na huduma ya AACU katika Newcastle NSW'
+        }
+    },
+    'services.html': {
+        en: {
+            title: 'Church Services & Worship Times - AACU Newcastle | Swahili & English',
+            description: 'AACU service times in Shortland, Newcastle NSW. Sunday worship and Saturday prayer at 10:00 AM with Swahili and English.',
+            keywords: 'African church services Newcastle, Sunday worship Australia, Swahili service NSW, prayer meeting Hunter, church Shortland NSW, bilingual worship',
+            ogTitle: 'Church Services & Worship Times - AACU Newcastle',
+            ogDescription: 'AACU Sunday and Saturday services at 10:00 AM in Shortland, Newcastle NSW.',
+            twitterTitle: 'Services & Worship Times - AACU',
+            twitterDescription: 'Bilingual worship in Swahili & English, Sundays & Saturdays in Newcastle.'
+        },
+        sw: {
+            title: 'Ratiba ya Ibada AACU | Kanisa la Kiswahili Newcastle NSW',
+            description: 'Ratiba ya ibada ya AACU huko Shortland, Newcastle NSW. Ibada ya Jumapili na maombi ya Jumamosi saa 10:00 asubuhi.',
+            keywords: 'ratiba ya ibada newcastle, ibada ya jumapili kiswahili, sala ya jumamosi nsw, kanisa la kiswahili shortland',
+            ogTitle: 'Ratiba ya Ibada AACU Newcastle',
+            ogDescription: 'Ibada ya Jumapili na Jumamosi saa 10:00 asubuhi katika Shortland, Newcastle NSW.',
+            twitterTitle: 'Ratiba ya Ibada AACU',
+            twitterDescription: 'Ibada kwa Kiswahili na Kiingereza kila wiki Newcastle.'
+        }
+    },
+    'contact.html': {
+        en: {
+            title: 'Contact AACU - African Church Newcastle NSW | Phone & Location',
+            description: 'Contact AACU in Shortland, Newcastle NSW. Phone, email, address, map, and contact form.',
+            keywords: 'African church Newcastle contact, AACU phone, Swahili church email, Newcastle church address, Hunter Region church contact',
+            ogTitle: 'Contact AACU - African Church Newcastle NSW',
+            ogDescription: 'Contact AACU church in Shortland, Newcastle NSW.',
+            twitterTitle: 'Contact AACU',
+            twitterDescription: 'Contact our African church in Newcastle NSW'
+        },
+        sw: {
+            title: 'Wasiliana na AACU | Kanisa la Kiswahili Newcastle NSW',
+            description: 'Wasiliana na AACU huko Shortland, Newcastle NSW. Namba ya simu, barua pepe, anuani, ramani, na fomu ya mawasiliano.',
+            keywords: 'mawasiliano ya kanisa newcastle, simu ya AACU, barua pepe kanisa la kiswahili, anuani ya kanisa shortland',
+            ogTitle: 'Wasiliana na AACU - Kanisa la Kiswahili Newcastle',
+            ogDescription: 'Mawasiliano ya AACU huko Shortland, Newcastle NSW.',
+            twitterTitle: 'Wasiliana na AACU',
+            twitterDescription: 'Namba, barua pepe na anuani ya AACU Newcastle NSW'
+        }
+    },
+    'gallery.html': {
+        en: {
+            title: 'Gallery - AACU Event Photos | Newcastle NSW',
+            description: 'AACU photo gallery with dated church events from Newcastle NSW.',
+            keywords: 'AACU gallery, church photos Newcastle, African church community images, Swahili Christian fellowship',
+            ogTitle: 'AACU Gallery - Event Photos',
+            ogDescription: 'AACU church event photos with date, event, and location details.',
+            twitterTitle: 'AACU Gallery',
+            twitterDescription: 'AACU event photos with date, event, and location details.'
+        },
+        sw: {
+            title: 'Picha za Matukio ya AACU | Newcastle NSW',
+            description: 'Mkusanyiko wa picha za matukio ya kanisa la AACU katika Newcastle NSW, ukiwa na tarehe, tukio, na mahali.',
+            keywords: 'picha za kanisa newcastle, picha za ubatizo, mkusanyiko wa picha AACU, kanisa la kiswahili australia',
+            ogTitle: 'Picha za AACU - Matukio ya Kanisa',
+            ogDescription: 'Picha za matukio ya kanisa la AACU zenye tarehe, tukio, na mahali.',
+            twitterTitle: 'Picha za AACU',
+            twitterDescription: 'Picha za matukio ya AACU pamoja na tarehe na mahali.'
+        }
+    }
+};
+
+function getCurrentPageKey() {
+    const fileName = window.location.pathname.split('/').pop();
+    return fileName || 'index.html';
+}
+
+function setMetaContent(selector, content) {
+    const element = document.querySelector(selector);
+    if (!element || !content) return;
+    element.setAttribute('content', content);
+}
+
+function applySeoMetadata(lang) {
+    const pageKey = getCurrentPageKey();
+    const pageMetadata = SEO_PAGE_CONTENT[pageKey] || SEO_PAGE_CONTENT['index.html'];
+    const localeMetadata = pageMetadata[lang] || pageMetadata.en;
+    if (!localeMetadata) return;
+
+    document.title = localeMetadata.title;
+    setMetaContent('meta[name="description"]', localeMetadata.description);
+    setMetaContent('meta[name="keywords"]', localeMetadata.keywords);
+    setMetaContent('meta[property="og:title"]', localeMetadata.ogTitle);
+    setMetaContent('meta[property="og:description"]', localeMetadata.ogDescription);
+    setMetaContent('meta[name="twitter:title"]', localeMetadata.twitterTitle);
+    setMetaContent('meta[name="twitter:description"]', localeMetadata.twitterDescription);
+    setMetaContent('meta[property="og:locale"]', lang === 'sw' ? 'sw_KE' : 'en_AU');
+}
+
 function initializeLanguageToggle() {
+    const initialLanguage = determineInitialLanguage();
+    applyTranslations(initialLanguage);
+    updateLanguageButton(initialLanguage);
+    initializeGallery();
+
     const toggle = document.getElementById('language-toggle');
     if (!toggle) return;
-    
-    // Load saved language preference
-    const savedLanguage = localStorage.getItem('aacu-language') || 'en';
-    let currentLanguage = savedLanguage;
-    updateLanguageButton(currentLanguage);
-    
+
+    let currentLanguage = initialLanguage;
     toggle.addEventListener('click', () => {
         currentLanguage = currentLanguage === 'en' ? 'sw' : 'en';
-        localStorage.setItem('aacu-language', currentLanguage);
+        setStoredLanguage(currentLanguage);
+        updateLanguageQueryParam(currentLanguage);
         updateLanguageButton(currentLanguage);
         applyTranslations(currentLanguage);
         initializeGallery();
     });
-    
-    // Apply saved language on page load
-    if (savedLanguage === 'sw') {
-        applyTranslations('sw');
-    }
 }
 
 function updateLanguageButton(lang) {
@@ -710,12 +1005,19 @@ function updateLanguageButton(lang) {
 }
 
 function applyTranslations(lang) {
-    Object.keys(translations[lang]).forEach(key => {
+    const normalized = normalizeLanguageCode(lang) || DEFAULT_LANGUAGE;
+    const dictionary = translations[normalized] || translations[DEFAULT_LANGUAGE];
+
+    Object.keys(dictionary).forEach((key) => {
         const elements = document.querySelectorAll(`[data-i18n="${key}"]`);
-        elements.forEach(element => {
-            element.textContent = translations[lang][key];
+        elements.forEach((element) => {
+            element.textContent = dictionary[key];
         });
     });
+
+    document.documentElement.lang = normalized;
+    setStoredLanguage(normalized);
+    applySeoMetadata(normalized);
 }
 
 /**
@@ -1031,9 +1333,11 @@ function initializeLazyLoading() {
  * Main initialization function
  */
 function initialize() {
-    // Carousel (hero images)
+    // Language preference and SEO metadata
+    initializeLanguageToggle();
+
+    // Visual content
     initializeCarousel();
-    initializeGallery();
     initializeSectionBackgrounds();
     
     // Core functionality
@@ -1041,7 +1345,6 @@ function initialize() {
     initializeAnnouncementsBanner();
     initializeContactForm();
     initializeKeyboardNavigation();
-    initializeLanguageToggle();
     
     // Enhancements
     initializeSmoothScroll();
@@ -1060,23 +1363,9 @@ function initialize() {
  * Run initialization when DOM is ready
  */
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        initialize();
-        // Apply saved language preference after everything is initialized
-        const savedLanguage = localStorage.getItem('aacu-language') || 'en';
-        if (savedLanguage === 'sw') {
-            applyTranslations('sw');
-            updateLanguageButton('sw');
-        }
-    });
+    document.addEventListener('DOMContentLoaded', initialize);
 } else {
     initialize();
-    // Apply saved language preference after everything is initialized
-    const savedLanguage = localStorage.getItem('aacu-language') || 'en';
-    if (savedLanguage === 'sw') {
-        applyTranslations('sw');
-        updateLanguageButton('sw');
-    }
 }
 
 /**

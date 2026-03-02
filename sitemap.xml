@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://aacu-church.org/</loc>
+    <lastmod>2026-03-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aacu-church.org/" />
+    <xhtml:link rel="alternate" hreflang="sw" href="https://aacu-church.org/?lang=sw" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aacu-church.org/" />
+  </url>
+  <url>
+    <loc>https://aacu-church.org/about.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aacu-church.org/about.html" />
+    <xhtml:link rel="alternate" hreflang="sw" href="https://aacu-church.org/about.html?lang=sw" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aacu-church.org/about.html" />
+  </url>
+  <url>
+    <loc>https://aacu-church.org/services.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aacu-church.org/services.html" />
+    <xhtml:link rel="alternate" hreflang="sw" href="https://aacu-church.org/services.html?lang=sw" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aacu-church.org/services.html" />
+  </url>
+  <url>
+    <loc>https://aacu-church.org/gallery.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aacu-church.org/gallery.html" />
+    <xhtml:link rel="alternate" hreflang="sw" href="https://aacu-church.org/gallery.html?lang=sw" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aacu-church.org/gallery.html" />
+  </url>
+  <url>
+    <loc>https://aacu-church.org/contact.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aacu-church.org/contact.html" />
+    <xhtml:link rel="alternate" hreflang="sw" href="https://aacu-church.org/contact.html?lang=sw" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aacu-church.org/contact.html" />
+  </url>
+</urlset>
